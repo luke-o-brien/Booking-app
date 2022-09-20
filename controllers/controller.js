@@ -15,7 +15,29 @@ async function register(req, res) {
   }
 }
 
+
+async function login(req, res) {
+  try {
+    // ! Hash the password the user is trying to log in with
+    // ! and compare it to the one in the database they registered with!!!
+
+    // ! Finds the user for the email
+    const user = await User.findOne({ email: req.body.email })
+    // ! This will check the hashes are the same 
+    const isValidPw = user.validatePassword(req.body.password)
+
+    if (isValidPw) {
+      res.json({ message: "Login successful!" } )
+    } else {
+      res.status(400).json({ message: "Login failed!" } )
+    }
+  } catch (err) {
+    res.status(400).json({ message: "Login failed!" } )
+  }
+
+}
 export default {
   getUsers,
   register,
+  login,
 }
