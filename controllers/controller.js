@@ -37,16 +37,19 @@ async function updatePassword(req, res) {
   try {
     const userId = req.params.userId
     console.log("User id: " + userId)
-    const newPassword = bcrypt.hashSync(req.body.password,bcrypt.genSaltSync())
+    const newPassword = await bcrypt.hashSync(req.body.password,bcrypt.genSaltSync())
     console.log("newPassword: " + newPassword)
+  
 
     const userToUpdate = await User.findById(userId)
 
-    if (!userToUpdate) return res.json({ message: "not a registered user" })
-
-    const updatedPassword = await User.findByIdAndUpdate(userId, newPassword, { new: true })
-
-    res.status(201).json(updatedPassword)
+    if (!userToUpdate) { 
+      return res.json({ message: "not a registered user" })
+    } else {
+      const updatedPassword = await User.findByIdAndUpdate(userId, { password: newPassword } , { new: true })
+      console.log("updated Password: " + updatedPassword)
+      res.status(201).json(updatedPassword)
+    }
   } catch (e) {
     if (e.path === "_id") {
       res.status(422).json({ message: "This user ID is in an invalid format." })
