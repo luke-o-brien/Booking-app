@@ -14,5 +14,8 @@ router.route("/register")
 
 router.route("/login")
   .post(controller.login)
-  
+
+router.route("/users/:userId")
+  .put(controller.updatePassword)
+
 export default router
