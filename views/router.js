@@ -2,6 +2,7 @@
 
 import express from "express"
 import controller from "../controllers/controller.js" 
+import secureRoute from "../middleware/secureRoute.js"
 
 
 const router = express.Router()
@@ -16,6 +17,6 @@ router.route("/login")
   .post(controller.login)
 
 router.route("/users/:userId")
-  .put(controller.updatePassword)
+  .put(secureRoute, controller.updatePassword)
 
 export default router
