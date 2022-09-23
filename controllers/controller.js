@@ -1,6 +1,10 @@
 import User from "../models/user.js"
 import bcrypt from 'bcrypt'
 
+
+import jwt from 'jsonwebtoken'
+import { secret } from '../config/environment.js'
+
 async function getUsers(req, res) {
   const allUsers = await User.find()
   res.json(allUsers)
@@ -9,6 +13,10 @@ async function getUsers(req, res) {
 async function register(req, res) {
   const body = req.body
   try {
+    if (body.password !== body.passwordConfirmation) {
+      return res.status(422).json({ message: "Passwords do not match." })
+    }
+
     const user = await User.create(body)
     res.status(201).json(user)
   } catch (err) {
@@ -24,7 +32,13 @@ async function login(req, res) {
     const isValidPw = user.validatePassword(req.body.password)
 
     if (isValidPw) {
-      res.json({ message: "Login successful!" } )
+      const token = jwt.sign(
+        { userId: user._id },
+        secret, 
+        { expiresIn: '24h' }
+      )
+
+      res.json({ message: "Login successful!", token } )
     } else {
       res.status(400).json({ message: "Login failed! step one" } )
     }
@@ -39,8 +53,7 @@ async function updatePassword(req, res) {
     console.log("User id: " + userId)
     const newPassword = await bcrypt.hashSync(req.body.password,bcrypt.genSaltSync())
     console.log("newPassword: " + newPassword)
-  
-
+    
     const userToUpdate = await User.findById(userId)
 
     if (!userToUpdate) { 
