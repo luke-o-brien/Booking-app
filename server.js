@@ -16,6 +16,8 @@ async function startServer() {
 
     app.use(logger)
 
+    app.use('/api', router)
+
     app.use(router)
 
     await connectToDb()
