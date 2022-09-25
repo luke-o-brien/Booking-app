@@ -40,10 +40,10 @@ async function login(req, res) {
 
       res.json({ message: "Login successful!", token } )
     } else {
-      res.status(400).json({ message: "Login failed! step one" } )
+      res.status(400).json({ message: "Password is incorrect" } )
     }
   } catch (err) {
-    res.status(400).json({ message: "Login failed!" } )
+    res.status(400).json({ message: "No user with that email address" } )
   }
 }
 
