@@ -3,7 +3,6 @@ import { connectToDb, disconnectDb } from "./db/helpers.js"
 import logger from "./middleware/logger.js"
 import router from "./views/router.js"
 import errorHandler from "./middleware/errorHandler.js";
-// import seed from "./db/seed.js"
 
 import mongoSanitize from 'express-mongo-sanitize';
 
@@ -22,7 +21,7 @@ async function startServer() {
     app.use(errorHandler)
 
     app.use(router)
-
+  
     await connectToDb()
 
     console.log('Connected to DB!')

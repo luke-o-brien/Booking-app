@@ -1,7 +1,6 @@
-// ? A file that will be used to 'seed' our database with initial data.
+
 
 import mongoose from 'mongoose'
-// ! Import both the data AND the model
 import User from '../models/user.js'
 import userData from './data/data.js'
 import { connectToDb, disconnectDb } from './helpers.js'
@@ -17,4 +16,4 @@ async function seed() {
   console.log('Goodbye 🌱')
 }
 
-export default seed
+export default seed()

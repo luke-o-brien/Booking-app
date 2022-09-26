@@ -1,8 +1,8 @@
 
 export default [
   {
-    username: 'luke1',
+    name: `Luke O'Brien`,
     email: 'lukeobrien02@gmail.com',
-    password: '1qwedfgbnmkjuytrew',
+    password: 'Yerevan1!',
   }
 ]

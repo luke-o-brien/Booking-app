@@ -6,7 +6,7 @@ import validator from "validator";
 import uniqueValidator from 'mongoose-unique-validator'
 
 const Userschema = new mongoose.Schema({
-  username: { 
+  name: { 
     type: String, 
     required: true,
   },
