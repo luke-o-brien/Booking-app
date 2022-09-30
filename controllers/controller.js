@@ -72,9 +72,28 @@ async function updatePassword(req, res) {
   }
 }
 
+
+async function authorize(req, res) {
+  try {
+
+    const userId = req.params.userId
+    const user = await User.findById(userId)
+    const isValidPw = user.validatePassword(req.body.password)
+
+    if (isValidPw) {
+      res.json({ message: "account authorized" , status: true  } )
+    } else {
+      res.status(400).json({ message: "Password is incorrect", status: false } )
+    }
+  } catch (err) {
+    res.status(400).json({ message: "No user with that email address", status: false } )
+  }
+}
+
 export default {
   getUsers,
   register,
   login,
   updatePassword,
+  authorize,
 }

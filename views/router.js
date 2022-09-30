@@ -19,4 +19,6 @@ router.route("/login")
 router.route("/users/:userId")
   .put(secureRoute, controller.updatePassword)
 
+router.route("/users/:userId/authorize")
+  .post(secureRoute, controller.authorize)
 export default router
