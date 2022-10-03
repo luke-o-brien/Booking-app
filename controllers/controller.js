@@ -38,7 +38,7 @@ async function login(req, res) {
         { expiresIn: '24h' }
       )
 
-      res.json({ message: "Login successful!", token } )
+      res.json({ message: "Login successful!", token, name: user.name, _id: user._id } )
     } else {
       res.status(400).json({ message: "Password is incorrect" } )
     }
