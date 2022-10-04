@@ -2,6 +2,7 @@
 
 import express from "express"
 import controller from "../controllers/controller.js" 
+import servicecontroller from "../controllers/serviceController.js"
 import secureRoute from "../middleware/secureRoute.js"
 
 
@@ -21,4 +22,7 @@ router.route("/users/:userId")
 
 router.route("/users/:userId/authorize")
   .post(secureRoute, controller.authorize)
+
+router.route("/services")
+  .get(servicecontroller.getServices)
 export default router
