@@ -25,4 +25,5 @@ router.route("/users/:userId/authorize")
 
 router.route("/services")
   .get(servicecontroller.getServices)
+  .get(servicecontroller.getServicesbysearch)
 export default router
