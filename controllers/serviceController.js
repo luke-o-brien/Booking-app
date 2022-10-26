@@ -5,6 +5,18 @@ async function getServices(req, res) {
   res.json(allServices)
 }
 
+async function getServiceByid(req, res) {
+  try {
+    const id = req.params.serviceId
+    const service = await Service.findById(id)
+    if (!service) return res.json({ message: "Service was not found" })
+
+    res.json(service)
+  
+  } catch (e) {
+    res.json({ message: 'There was problem trying to get this service please try again later' })
+  }
+}
 async function getServicesbysearch(req, res) {
   try {
     const date = req.query.date
@@ -16,7 +28,10 @@ async function getServicesbysearch(req, res) {
     res.json({ message: "there was a problem getting services" }) 
   }
 }
+
+
 export default {
   getServices,
+  getServiceByid,
   getServicesbysearch,
 }

@@ -26,4 +26,8 @@ router.route("/users/:userId/authorize")
 router.route("/services")
   .get(servicecontroller.getServices)
   .get(servicecontroller.getServicesbysearch)
+
+router.route("/services/:serviceId")
+  .get(servicecontroller.getServiceByid)
+
 export default router
