@@ -29,5 +29,6 @@ router.route("/services")
 
 router.route("/services/:serviceId")
   .get(servicecontroller.getServiceByid)
+  .put(servicecontroller.updateServicedetails)
 
 export default router

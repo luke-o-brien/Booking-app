@@ -29,9 +29,31 @@ async function getServicesbysearch(req, res) {
   }
 }
 
+async function updateServicedetails(req,res) {
+  try {
+    const serviceId = req.params.serviceId
+    const newService = req.body
+
+    const serviceToUpdate = await Service.findById(serviceId)
+
+    if (!serviceToUpdate) return res.json({ message: "Service not found" })
+
+    const updatedService = await Service.findByIdAndUpdate(serviceId, newService, { new: true })
+
+    res.status(201).json(updatedService)
+  } catch (e) {
+    if (e.path === "_id") {
+      res.status(422).json({ message: "This Service ID is in an invalid format." })
+    } else {
+      res.status(422).json({ message: 'Service has missing or invalid fields.' })
+    }
+  }
+}
+
 
 export default {
   getServices,
   getServiceByid,
   getServicesbysearch,
+  updateServicedetails,
 }
