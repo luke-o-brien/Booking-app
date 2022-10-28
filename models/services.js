@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Bookingschema from "./Booking.js"
 
 
 const Serviceschema = new mongoose.Schema({
@@ -13,6 +14,7 @@ const Serviceschema = new mongoose.Schema({
   SeatNumber: { type: Number, required: true },
   Origin: { type: String, required: true },
   Destination: { type: String, required: true },
+  bookings: [Bookingschema.schema],
 })
 
 export default mongoose.model('Service', Serviceschema)

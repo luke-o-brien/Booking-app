@@ -3,6 +3,7 @@
 import express from "express"
 import controller from "../controllers/controller.js" 
 import servicecontroller from "../controllers/serviceController.js"
+import bookingController from "../controllers/BookingController.js"
 import secureRoute from "../middleware/secureRoute.js"
 
 
@@ -30,5 +31,9 @@ router.route("/services")
 router.route("/services/:serviceId")
   .get(servicecontroller.getServiceByid)
   .put(servicecontroller.updateServicedetails)
+
+
+router.route("/services/:serviceId/bookings")
+  .post(bookingController.createBooking)
 
 export default router
