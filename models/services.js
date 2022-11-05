@@ -10,10 +10,20 @@ const Serviceschema = new mongoose.Schema({
   ArrivalDate: { type: String, required: true },
   DepartureTime: { type: String, required: true },
   ArrivalTime: { type: String, required: true },
+  duration: { type: Number, required: true },
   BusType: { type: String, required: true },
   SeatNumber: { type: Number, required: true },
   Origin: { type: String, required: true },
   Destination: { type: String, required: true },
+  facilities: { 
+    aircondition: { type: Boolean, required: false },
+    poweroutlet: { type: Boolean, required: false },
+    accesible: { type: Boolean, required: false },
+    usb: { type: Boolean, required: false },
+    wifi: { type: Boolean, required: false },
+    wc: { type: Boolean, required: false },
+
+  }, 
   bookings: [Bookingschema.schema],
 })
 
