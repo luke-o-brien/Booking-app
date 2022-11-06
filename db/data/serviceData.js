@@ -45,8 +45,8 @@ export default [ {
 {
   serviceNumber: "E1",
   operator: "Eurolink",
-  date: "11/12/2022",
-  DepartureDate: "11/11/2022",
+  date: "2022-11-11",
+  DepartureDate: "2022-11-11",
   ArrivalDate: "11/11/2022",
   DepartureTime: "0900",
   ArrivalTime: "2100",
@@ -67,8 +67,8 @@ export default [ {
 {
   serviceNumber: "E1N",
   operator: "Eurolink",
-  date: "11/12/2022",
-  DepartureDate: "11/11/2022",
+  date: "2022-11-11",
+  DepartureDate: "2022-11-11",
   ArrivalDate: "12/11/2022",
   DepartureTime: "2100",
   ArrivalTime: "0900",
