@@ -19,9 +19,13 @@ async function getServiceByid(req, res) {
 }
 async function getServicesbysearch(req, res) {
   try {
-    const date = req.query.date
-    console.log(date)
-    const services = await Service.find( { date: date } )
+    const dates = req.query.date
+    const origin = req.query.origin
+    const destination = req.query.destination
+    console.log(dates)
+    console.log(origin)
+    console.log(destination)
+    const services = await Service.find( { Origin: origin, Destination: destination, date: dates }  )
     if (!services) return res.json({ message: "no services on that date" })
     res.json(services)
   } catch (err) {
