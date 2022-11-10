@@ -15,6 +15,7 @@ async function createBooking(req, res) {
 
     const savedService = await service.save()
     res.json(savedService)
+    console.log(savedService)
   } catch (e) {
     res.json({ message: "There was a problem booking this service" })
   }
