@@ -38,5 +38,6 @@ router.route("/services/:serviceId")
 
 router.route("/services/:serviceId/bookings")
   .post(bookingController.createBooking)
+  .delete(bookingController.deleteBooking)
 
 export default router

@@ -1,4 +1,5 @@
 import Service from "../models/services.js"
+import Booking from "../models/Booking.js"
 
 async function createBooking(req, res) {
   try {
@@ -21,6 +22,27 @@ async function createBooking(req, res) {
   }
 }
 
+
+async function deleteBooking(req,res) {
+  try {
+    const serviceId = req.params.serviceId
+    const bookingId = req.body.bookingId
+    console.log(bookingId)
+
+    const BookingToDelete = await Service.findById(serviceId)
+    const toDelete = BookingToDelete.bookings
+
+    if (!BookingToDelete) return res.json({ message: "Booking not found" })
+
+    await BookingToDelete.bookings.findByIdAndDelete(bookingId)
+    
+    res.sendStatus(204)
+  } catch (e) {
+    res.status(422).json({ message: "This BookingID is in an invalid format." })
+    console.log(e)
+  } 
+}
 export default {
   createBooking,
+  deleteBooking,
 }
