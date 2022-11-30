@@ -1,5 +1,6 @@
 import Service from "../models/services.js"
 import Booking from "../models/Booking.js"
+import services from "../models/services.js"
 
 async function createBooking(req, res) {
   try {
@@ -19,8 +20,32 @@ async function createBooking(req, res) {
     console.log(savedService)
   } catch (e) {
     res.json({ message: "There was a problem booking this service" })
+  } 
+}
+
+
+
+
+async function getBookingById(req, res) {
+  try {
+    const id = req.params.serviceId
+    console.log(`Service Id: ${id}`)
+    const bookingId = req.query.bookingId
+    console.log(` Booking Id: ${bookingId}`)
+    const service = await Service.findById(id)
+    if (!service) { 
+      return res.json({ message: "Service was not found" }) 
+    }
+    const Booking = await Service.find( { bookings: { $elemMatch: { _id: bookingId } } } )
+    res.json(Booking)
+    console.log(Booking)
+  
+  } catch (e) {
+    res.json({ message: 'There was problem trying to get this service please try again later' })
+    console.log(e)
   }
 }
+
 
 
 async function deleteBooking(req,res) {
@@ -29,12 +54,14 @@ async function deleteBooking(req,res) {
     const bookingId = req.body.bookingId
     console.log(bookingId)
 
-    const BookingToDelete = await Service.findById(serviceId)
-    const toDelete = BookingToDelete.bookings
+    const Services = await Service.findById(serviceId)
+    console.log(Services)
+    if (!Services) return res.json({ message: "Booking not found" })
+    await Service.findOneAndUpdate( { _id: serviceId } , { $pull: { bookings: { _id: bookingId  } } } )
 
-    if (!BookingToDelete) return res.json({ message: "Booking not found" })
+    
 
-    await BookingToDelete.bookings.findByIdAndDelete(bookingId)
+    
     
     res.sendStatus(204)
   } catch (e) {
@@ -45,4 +72,5 @@ async function deleteBooking(req,res) {
 export default {
   createBooking,
   deleteBooking,
+  getBookingById,
 }
