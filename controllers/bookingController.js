@@ -59,10 +59,6 @@ async function deleteBooking(req,res) {
     if (!Services) return res.json({ message: "Booking not found" })
     await Service.findOneAndUpdate( { _id: serviceId } , { $pull: { bookings: { _id: bookingId  } } } )
 
-    
-
-    
-    
     res.sendStatus(204)
   } catch (e) {
     res.status(422).json({ message: "This BookingID is in an invalid format." })

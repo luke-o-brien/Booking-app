@@ -20,8 +20,11 @@ async function getServiceByid(req, res) {
 async function getServicesbysearch(req, res) {
   try {
     const dates = req.query.date
+    console.log("incoming date:" + dates)
     const origin = req.query.origin
+    console.log("incoming origin:" + origin)
     const destination = req.query.destination
+    console.log("incoming destination:" + destination)
     console.log(dates)
     console.log(origin)
     console.log(destination)
