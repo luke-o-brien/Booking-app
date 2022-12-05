@@ -23,7 +23,7 @@ router.route("/users/:userId")
 
 router.route("/users/:userId/authorize")
   .post(secureRoute, controller.authorize)
-
+  
 router.route("/services")
   .get(servicecontroller.getServices)
   
@@ -42,4 +42,6 @@ router.route("/services/:serviceId/bookings")
   .get(bookingController.getBookingById)
 
 
+router.route("/users/:userId/bookings")
+  .post(bookingController.createCustomerBooking)
 export default router

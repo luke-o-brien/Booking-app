@@ -1,6 +1,7 @@
 import Service from "../models/services.js"
-import Booking from "../models/Booking.js"
-import services from "../models/services.js"
+//import Booking from "../models/Booking.js"
+//import services from "../models/services.js"
+import User from "../models/user.js"
 
 async function createBooking(req, res) {
   try {
@@ -17,8 +18,9 @@ async function createBooking(req, res) {
 
     const savedService = await service.save()
     res.json(savedService)
-    console.log(savedService)
+    //console.log(savedService)
   } catch (e) {
+    console.log(e)
     res.json({ message: "There was a problem booking this service" })
   } 
 }
@@ -65,8 +67,34 @@ async function deleteBooking(req,res) {
     console.log(e)
   } 
 }
+
+
+async function createCustomerBooking(req, res) {
+  try {
+    const userId = req.params.userId
+    //console.log(userId)
+    // const user = req.currentUser
+    const booking = req.body
+    const customer = await User.findById(userId)
+    console.log(customer)
+    if (!customer) {
+      return res.json({ message: 'No service found' })
+    }
+
+    // booking.user = user
+    customer.bookings.push(booking)
+
+    const savedService = await customer.save({ validateBeforeSave: false })
+    res.json(savedService)
+  } catch (e) {
+    console.log(e)
+    res.json({ message: "There was a problem booking this service" })
+  } 
+}
+
 export default {
   createBooking,
   deleteBooking,
   getBookingById,
+  createCustomerBooking,
 }

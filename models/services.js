@@ -4,14 +4,12 @@ import validator from "validator";
 
 const Bookingschema = new mongoose.Schema({
   serviceId: { type: String, required: true },
-  //customerref: { type: String, required: true, default: () => nanoid(7), unique: true },
+  userId: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true, validate: (email) => validator.isEmail(email) } ,
   phoneNumber: { type: String, required: true },
   nationality: { type: String, required: true }, 
-  Origin: { type: String, required: false },
-  Destination: { type: String, required: false },
 })
 
 const Serviceschema = new mongoose.Schema({
