@@ -20,6 +20,7 @@ router.route("/login")
 
 router.route("/users/:userId")
   .put(secureRoute, controller.updatePassword)
+  .get(controller.getsingleUser)
 
 router.route("/users/:userId/authorize")
   .post(secureRoute, controller.authorize)

@@ -90,10 +90,25 @@ async function authorize(req, res) {
   }
 }
 
+
+async function getsingleUser(req, res) {
+  try {
+    const userId = req.params.userId
+    const service = await User.findById(userId)
+    if (!service) return res.json({ message: "Service was not found" })
+
+    res.json(service)
+  
+  } catch (e) {
+    res.json({ message: 'There was problem trying to get this service please try again later' })
+  }
+}
+
 export default {
   getUsers,
   register,
   login,
   updatePassword,
   authorize,
+  getsingleUser,
 }
